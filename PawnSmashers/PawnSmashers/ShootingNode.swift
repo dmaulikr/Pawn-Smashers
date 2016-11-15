@@ -1,5 +1,5 @@
 //
-//  ScoreRing.swift
+//  ShootingNode.swift
 //  PawnSmashers
 //
 //  Created by student on 11/15/16.
@@ -8,13 +8,16 @@
 
 import Foundation
 import SpriteKit
-class ScoreRing : SKSpriteNode {
-    
-    
+class ShootingNode : SKSpriteNode {
     func didMoveToScene() {
         
     }
     
+    func shoot() {
+        
+    }
     
-    
+    func calcScore() {
+        
+    }
 }

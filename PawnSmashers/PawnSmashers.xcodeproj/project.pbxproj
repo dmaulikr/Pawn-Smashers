@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F4B48721DDBC58D008C3D5F /* ScoreRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B48711DDBC58D008C3D5F /* ScoreRing.swift */; };
 		3F4B48741DDBC88B008C3D5F /* GameStatesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B48731DDBC88B008C3D5F /* GameStatesEnum.swift */; };
+		3F4B48761DDBC9C7008C3D5F /* ShootingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B48751DDBC9C7008C3D5F /* ShootingNode.swift */; };
 		3F849D611DDBBF0400983D75 /* ShootingAreaRed.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F849D601DDBBF0400983D75 /* ShootingAreaRed.sks */; };
 		3F849D631DDBBFDE00983D75 /* ShootingAreaBlue.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F849D621DDBBFDE00983D75 /* ShootingAreaBlue.sks */; };
 		3F8FE9731DD3E386006DBE92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FE9721DD3E386006DBE92 /* AppDelegate.swift */; };
@@ -21,13 +22,13 @@
 		3F8FE9831DD3E387006DBE92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FE9811DD3E387006DBE92 /* LaunchScreen.storyboard */; };
 		3F8FE98B1DD3ED1B006DBE92 /* scoringCircle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FE98A1DD3ED1B006DBE92 /* scoringCircle.sks */; };
 		3F8FE9901DD3EEC2006DBE92 /* ScorePawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FE98F1DD3EEC2006DBE92 /* ScorePawn.swift */; };
-		3F8FE9931DD3F2E3006DBE92 /* Shooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FE9921DD3F2E3006DBE92 /* Shooter.swift */; };
 		3F8FE9961DD3F372006DBE92 /* PhysicsBodies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FE9951DD3F372006DBE92 /* PhysicsBodies.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3F4B48711DDBC58D008C3D5F /* ScoreRing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreRing.swift; sourceTree = "<group>"; };
 		3F4B48731DDBC88B008C3D5F /* GameStatesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStatesEnum.swift; sourceTree = "<group>"; };
+		3F4B48751DDBC9C7008C3D5F /* ShootingNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootingNode.swift; sourceTree = "<group>"; };
 		3F849D601DDBBF0400983D75 /* ShootingAreaRed.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ShootingAreaRed.sks; sourceTree = "<group>"; };
 		3F849D621DDBBFDE00983D75 /* ShootingAreaBlue.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ShootingAreaBlue.sks; sourceTree = "<group>"; };
 		3F8FE96F1DD3E386006DBE92 /* PawnSmashers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawnSmashers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,7 +43,6 @@
 		3F8FE9841DD3E387006DBE92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F8FE98A1DD3ED1B006DBE92 /* scoringCircle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = scoringCircle.sks; sourceTree = "<group>"; };
 		3F8FE98F1DD3EEC2006DBE92 /* ScorePawn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScorePawn.swift; sourceTree = "<group>"; };
-		3F8FE9921DD3F2E3006DBE92 /* Shooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shooter.swift; sourceTree = "<group>"; };
 		3F8FE9951DD3F372006DBE92 /* PhysicsBodies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBodies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,8 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				3F8FE98F1DD3EEC2006DBE92 /* ScorePawn.swift */,
-				3F8FE9921DD3F2E3006DBE92 /* Shooter.swift */,
 				3F4B48711DDBC58D008C3D5F /* ScoreRing.swift */,
+				3F4B48751DDBC9C7008C3D5F /* ShootingNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -219,7 +219,7 @@
 				3F8FE9961DD3F372006DBE92 /* PhysicsBodies.swift in Sources */,
 				3F4B48741DDBC88B008C3D5F /* GameStatesEnum.swift in Sources */,
 				3F8FE9791DD3E387006DBE92 /* GameScene.swift in Sources */,
-				3F8FE9931DD3F2E3006DBE92 /* Shooter.swift in Sources */,
+				3F4B48761DDBC9C7008C3D5F /* ShootingNode.swift in Sources */,
 				3F4B48721DDBC58D008C3D5F /* ScoreRing.swift in Sources */,
 				3F8FE97B1DD3E387006DBE92 /* GameViewController.swift in Sources */,
 				3F8FE9731DD3E386006DBE92 /* AppDelegate.swift in Sources */,

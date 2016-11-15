@@ -11,14 +11,40 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    private var shootingNode1:ShootingNode?
+    private var shootingNode2:ShootingNode?
+    private var sceneCamera:SKCameraNode?
+    var gameState = GameStates.Shooting1 {
+        didSet {
+            switch gameState {
+            case .Shooting1:
+                sceneCamera?.position = (shootingNode1?.position)!
+            case .Shooting2:
+                sceneCamera?.position = (shootingNode1?.position)!
+            case .Setup1,
+                 .Setup2:
+                sceneCamera?.position = (shootingNode1?.position)!
+            default:
+                sceneCamera?.position = CGPoint(x: 0,y: 0)
+
+            }
+        }
+    }
     
     override func didMove(to view: SKView) {
+        sceneCamera = childNode(withName: "camera") as? SKCameraNode
+        shootingNode1 = childNode(withName: "shooter1") as? ShootingNode
+        shootingNode2 = childNode(withName: "shooter2") as? ShootingNode
+    }
+    
+    
+    func didBegin(_ contact: SKPhysicsContact) {
         
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
-
+        gameState = GameStates.Shooting2
     }
     
     func touchMoved(toPoint pos : CGPoint) {
