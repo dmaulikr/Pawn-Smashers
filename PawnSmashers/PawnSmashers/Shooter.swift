@@ -9,16 +9,4 @@
 import Foundation
 import SpriteKit
 
-class Shooter : SKSpriteNode {
-    func didMoveToScene() {
-        
-    }
-    
-    func shoot() {
-        
-    }
-    
-    func calcScore() {
-        
-    }
-}
+
