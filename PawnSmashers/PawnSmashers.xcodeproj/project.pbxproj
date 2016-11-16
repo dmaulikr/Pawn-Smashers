@@ -169,7 +169,7 @@
 				TargetAttributes = {
 					3F8FE96E1DD3E386006DBE92 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 5W68HNMG32;
+						DevelopmentTeam = JB4EH8CH58;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -345,10 +345,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5W68HNMG32;
+				DEVELOPMENT_TEAM = JB4EH8CH58;
 				INFOPLIST_FILE = PawnSmashers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlynchp.PawnSmashers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tarazevits.PawnSmashers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -359,10 +359,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5W68HNMG32;
+				DEVELOPMENT_TEAM = JB4EH8CH58;
 				INFOPLIST_FILE = PawnSmashers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlynchp.PawnSmashers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tarazevits.PawnSmashers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 2;

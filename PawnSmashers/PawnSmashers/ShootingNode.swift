@@ -14,8 +14,9 @@ class ShootingNode : SKSpriteNode {
     }
     
     func shoot() {
-        
-    }
+        if (self.physicsBody?.velocity.dy <= 40.0) {
+            self.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 90))
+        }
     
     func calcScore() {
         

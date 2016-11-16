@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let cameraNode = SKCameraNode()
     var gameState = GameStates.Shooting1 {
         didSet {
+            print("gameState changed")
             switch gameState {
             case .Shooting1:
                 cameraNode.position = (shootingNode1?.position)!
@@ -46,7 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        gameState = GameStates.Shooting2
+        
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -54,11 +55,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-    
+        gameState = GameStates.Shooting2
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        shootingNode1?.shoot()
+        print("impulse on shooter1")
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
