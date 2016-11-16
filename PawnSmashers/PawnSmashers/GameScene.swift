@@ -63,8 +63,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first! as UITouch
-        let location = touch.location(in: self.view)
-        self.camera?.position = location
+        let location = touch.location(in: self)
+        let previousLocation = touch.previousLocation(in: self)
+        let delta = CGPoint(x: location.x - previousLocation.x, y: location.y - previousLocation.y)
+        cameraNode.position = CGPoint(x: cameraNode.position.x + delta.x, y: cameraNode.position.y + delta.y)
         
     }
     
