@@ -14,7 +14,11 @@ class ShootingNode : SKSpriteNode {
     }
     
     func shoot(shootingVector:CGVector) {
-            self.physicsBody?.applyImpulse(shootingVector)
+        var shootVec = shootingVector
+        //shootVec.dy = 0.0;
+        shootVec.dx = shootVec.dx * 10
+            self.physicsBody?.applyImpulse(shootVec)
+        /*
         if ((self.physicsBody?.velocity.dx)! <= CGFloat(200) ) {
             
         self.physicsBody?.velocity.dx = CGFloat(200)
@@ -23,10 +27,14 @@ class ShootingNode : SKSpriteNode {
         if ((self.physicsBody?.velocity.dy)! <= CGFloat(200)) {
             
         self.physicsBody?.velocity.dy = CGFloat(200)
-        }
+        }*/
     }
     
     func calcScore() {
         
+    }
+    
+    func isMoving() {
+        //if self.physicsBody?.velocity.dx >
     }
 }

@@ -23,6 +23,7 @@
 		3F8FE98B1DD3ED1B006DBE92 /* scoringCircle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FE98A1DD3ED1B006DBE92 /* scoringCircle.sks */; };
 		3F8FE9901DD3EEC2006DBE92 /* ScorePawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FE98F1DD3EEC2006DBE92 /* ScorePawn.swift */; };
 		3F8FE9961DD3F372006DBE92 /* PhysicsBodies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FE9951DD3F372006DBE92 /* PhysicsBodies.swift */; };
+		3FA2DC551DDD408B00AA8140 /* ShuffleBoard.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3FA2DC541DDD408B00AA8140 /* ShuffleBoard.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		3F8FE98A1DD3ED1B006DBE92 /* scoringCircle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = scoringCircle.sks; sourceTree = "<group>"; };
 		3F8FE98F1DD3EEC2006DBE92 /* ScorePawn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScorePawn.swift; sourceTree = "<group>"; };
 		3F8FE9951DD3F372006DBE92 /* PhysicsBodies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBodies.swift; sourceTree = "<group>"; };
+		3FA2DC541DDD408B00AA8140 /* ShuffleBoard.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ShuffleBoard.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				3F8FE9741DD3E387006DBE92 /* GameScene.sks */,
 				3F849D601DDBBF0400983D75 /* ShootingAreaRed.sks */,
 				3F849D621DDBBFDE00983D75 /* ShootingAreaBlue.sks */,
+				3FA2DC541DDD408B00AA8140 /* ShuffleBoard.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				3F8FE9801DD3E387006DBE92 /* Assets.xcassets in Resources */,
 				3F8FE9831DD3E387006DBE92 /* LaunchScreen.storyboard in Resources */,
 				3F8FE9771DD3E387006DBE92 /* Actions.sks in Resources */,
+				3FA2DC551DDD408B00AA8140 /* ShuffleBoard.sks in Resources */,
 				3F849D631DDBBFDE00983D75 /* ShootingAreaBlue.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

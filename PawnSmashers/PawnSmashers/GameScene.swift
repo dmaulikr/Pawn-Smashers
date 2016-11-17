@@ -15,7 +15,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var shootingNode2:ShootingNode?
     var shootingVector:CGVector?
     let cameraNode = SKCameraNode()
-    var gameState = GameStates.Shooting2 {
+    var pawnCount:Int = 0
+    var gameState = GameStates.Setup2 {
         didSet {
             print("gameState changed")
             switch gameState {
@@ -27,7 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 cameraNode.position = CGPoint(x: -350, y: 724)
             case .Setup1,
                  .Setup2:
-                cameraNode.position = (shootingNode1?.position)!
+                cameraNode.position = CGPoint(x: 1024, y: 750)
             case .Moving1:
                 cameraNode.position = (shootingNode2?.position)!
             case .Moving2:
@@ -85,8 +86,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //gameState = GameStates.Shooting2
-        shootingNode2?.shoot(shootingVector: shootingVector!)
-        print("impulse applied")
+        let touch = touches.first! as UITouch
+        let location = touch.location(in: self)
+        
         
         switch gameState {
         case .Shooting1:
@@ -99,7 +101,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameState = GameStates.Moving2
         case .Setup1,
              .Setup2:
-            placeBlock()
+            placeBlock(location:location)
+            print("in setup1 or setup2")
         case .Moving1,
              .Moving2:
             //checkIfStopped()
@@ -127,7 +130,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             cameraNode.position = CGPoint(x: -350, y: 724)
         case .Setup1,
              .Setup2:
-            cameraNode.position = CGPoint(x: 0,y: 0)
+            cameraNode.position = CGPoint(x: 1024,y: 750)
         case .Moving1:
             cameraNode.position = (shootingNode1?.position)!
             checkIfStopped(shooter:(shootingNode1)!)
@@ -145,13 +148,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return CGVector(dx: -currentLocation.x + previousLocation.x, dy: currentLocation.y - previousLocation.y)
     }
     
-    func placeBlock() {
-        
+    func placeBlock(location:CGPoint) {
+        pawnCount += 1
+        var node = SKSpriteNode(imageNamed: "white_square")
+        node.colorBlendFactor = 0
+        node.position = location
+        node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
+        node.physicsBody?.isDynamic = true // 2
+        node.physicsBody?.categoryBitMask = PhysicsCategory.ScorePawn
+        node.physicsBody?.contactTestBitMask = PhysicsCategory.None
+        node.physicsBody?.collisionBitMask = PhysicsCategory.None
+        node.zPosition = 10
+        addChild(node)
+        if( pawnCount > 3) { gameState = GameStates.Shooting2 }
     }
     
     func checkIfStopped(shooter:ShootingNode) {
-        if shooter.physicsBody!.velocity.dx < CGFloat(0) || shooter.physicsBody!.velocity.dy < CGFloat(0) {
+        if shooter.physicsBody!.velocity.dx == CGFloat(0) && shooter.physicsBody!.velocity.dy == CGFloat(0) {
             print("node has stopped")
+            
+            switch gameState {
+            case .Moving1:
+                gameState = GameStates.Shooting2
+            case .Moving2:
+                gameState = GameStates.Shooting1
+            default:
+                print("shiiiiite")
+            }
         }
     }
 }

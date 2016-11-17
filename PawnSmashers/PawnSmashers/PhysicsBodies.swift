@@ -14,4 +14,5 @@ struct PhysicsCategory {
     static let ScorePawn:   UInt32 = 0b10 // 2
     static let SpeedZone:   UInt32 = 0b100 // 4
     static let Edge:        UInt32 = 0b1000 // 8
+    static let Shooter:     UInt32 = 0b10000 // 16
 }
