@@ -15,6 +15,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var shootingNode2:ShootingNode?
     var shootingVector:CGVector?
     let cameraNode = SKCameraNode()
+    var scoreLabel: SKLabelNode!
+    var roundLabel: SKLabelNode!
+    var shotCount:Int = 0
+    let NUMSHOTS:Int = 2
     var pawnCount:Int = 0
     var gameState = GameStates.Setup2 {
         didSet {
@@ -33,6 +37,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 cameraNode.position = (shootingNode2?.position)!
             case .Moving2:
                 cameraNode.position = (shootingNode1?.position)!
+            case .RoundEnd:
+                cameraNode.position = CGPoint(x: 1024, y: 750)
+                
             default:
                 cameraNode.position = CGPoint(x: 0,y: 0)
 
@@ -50,6 +57,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         shootingNode2 = childNode(withName: "shooter2") as? ShootingNode
     }
     
+    func reset(){
+        
+    }
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -130,13 +140,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             cameraNode.position = CGPoint(x: -350, y: 724)
         case .Setup1,
              .Setup2:
-            cameraNode.position = CGPoint(x: 1024,y: 750)
+            cameraNode.position = CGPoint(x: 1024, y: 750)
         case .Moving1:
             cameraNode.position = (shootingNode1?.position)!
             checkIfStopped(shooter:(shootingNode1)!)
         case .Moving2:
             cameraNode.position = (shootingNode2?.position)!
             checkIfStopped(shooter:(shootingNode2)!)
+        case .RoundEnd:
+            cameraNode.position = CGPoint(x: 1024, y: 750)
+            roundOver()
         default:
             cameraNode.position = CGPoint(x: 0,y: 0)
             
@@ -150,11 +163,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func placeBlock(location:CGPoint) {
         pawnCount += 1
-        var node = SKSpriteNode(imageNamed: "white_square")
+        let node = SKSpriteNode(imageNamed: "white_square")
         node.colorBlendFactor = 0
         node.position = location
         node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
-        node.physicsBody?.isDynamic = true // 2
+        node.physicsBody?.isDynamic = false
         node.physicsBody?.categoryBitMask = PhysicsCategory.ScorePawn
         node.physicsBody?.contactTestBitMask = PhysicsCategory.None
         node.physicsBody?.collisionBitMask = PhysicsCategory.None
@@ -170,13 +183,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             switch gameState {
             case .Moving1:
-                gameState = GameStates.Shooting2
+                shotCount += 1
+                if shotCount < NUMSHOTS
+                {
+                    gameState = GameStates.Shooting2
+                }
+                else
+                {
+                    gameState = GameStates.RoundEnd
+                }
             case .Moving2:
-                gameState = GameStates.Shooting1
+                shotCount += 1
+                if shotCount < NUMSHOTS{
+                    gameState = GameStates.Shooting1
+                }
+                else
+                {
+                    gameState = GameStates.RoundEnd
+                }
             default:
                 print("shiiiiite")
             }
         }
         print(shooter.physicsBody!.velocity)
+    }
+    
+    func roundOver() {
+        roundLabel = SKLabelNode(fontNamed: "Futura-CondensedExtraBold")
+        roundLabel.fontSize = 150
+        roundLabel.zPosition = 12
+        roundLabel.text = "Round Over"
+        roundLabel.horizontalAlignmentMode = .center
+        roundLabel.verticalAlignmentMode = .baseline
+        roundLabel.position = CGPoint(x: 1024, y: 1000)
+        addChild(roundLabel)
+        
+        scoreLabel = SKLabelNode(fontNamed: "Futura")
+        scoreLabel.fontSize = 80
+        roundLabel.zPosition = 11
+        scoreLabel.text = "Score: 10,000,000 (no scoring yet)"
+        scoreLabel.horizontalAlignmentMode = .center
+        scoreLabel.verticalAlignmentMode = .baseline
+        scoreLabel.position = CGPoint(x: 1024, y: 800)
+        addChild(scoreLabel)
     }
 }
