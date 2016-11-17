@@ -39,7 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 cameraNode.position = (shootingNode1?.position)!
             case .RoundEnd:
                 cameraNode.position = CGPoint(x: 1024, y: 750)
-                
+                roundOver()
             default:
                 cameraNode.position = CGPoint(x: 0,y: 0)
 
@@ -149,7 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             checkIfStopped(shooter:(shootingNode2)!)
         case .RoundEnd:
             cameraNode.position = CGPoint(x: 1024, y: 750)
-            roundOver()
+            
         default:
             cameraNode.position = CGPoint(x: 0,y: 0)
             
@@ -168,9 +168,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         node.position = location
         node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
         node.physicsBody?.isDynamic = false
-        node.physicsBody?.categoryBitMask = PhysicsCategory.ScorePawn
+        node.physicsBody?.categoryBitMask = PhysicsCategory.Shooter
         node.physicsBody?.contactTestBitMask = PhysicsCategory.None
-        node.physicsBody?.collisionBitMask = PhysicsCategory.None
+        node.physicsBody?.collisionBitMask = PhysicsCategory.Shooter
         node.zPosition = 10
         addChild(node)
         if( pawnCount > 3) { gameState = GameStates.Shooting2 }
@@ -226,5 +226,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.verticalAlignmentMode = .baseline
         scoreLabel.position = CGPoint(x: 1024, y: 800)
         addChild(scoreLabel)
+        
+        shootingNode2?.position = CGPoint(x:-1115, y:741)
+        shootingNode1?.position = CGPoint(x:3013, y:763)
+        gameState = GameStates.Shooting2
     }
 }
