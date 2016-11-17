@@ -13,17 +13,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var shootingNode1:ShootingNode?
     private var shootingNode2:ShootingNode?
+    var shootingVector:CGVector?
     let cameraNode = SKCameraNode()
-    var gameState = GameStates.Shooting1 {
+    var gameState = GameStates.Shooting2 {
         didSet {
             print("gameState changed")
             switch gameState {
             case .Shooting1:
-                cameraNode.position = (shootingNode1?.position)!
+                //cameraNode.position = (shootingNode1?.position)!
+                cameraNode.position = CGPoint(x: 2306, y: 724)
             case .Shooting2:
-                cameraNode.position = (shootingNode1?.position)!
+                //cameraNode.position = (shootingNode2?.position)!
+                cameraNode.position = CGPoint(x: -350, y: 724)
             case .Setup1,
                  .Setup2:
+                cameraNode.position = (shootingNode1?.position)!
+            case .Moving1:
+                cameraNode.position = (shootingNode2?.position)!
+            case .Moving2:
                 cameraNode.position = (shootingNode1?.position)!
             default:
                 cameraNode.position = CGPoint(x: 0,y: 0)
@@ -35,7 +42,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         addChild(cameraNode)
         camera = cameraNode
-        cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
+        //cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
+        //cameraNode.position = CGPoint(x: 2306, y: 724)
+        cameraNode.position = CGPoint(x: -350, y: 724)
         shootingNode1 = childNode(withName: "shooter1") as? ShootingNode
         shootingNode2 = childNode(withName: "shooter2") as? ShootingNode
     }
@@ -55,12 +64,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        gameState = GameStates.Shooting2
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        shootingNode1?.shoot()
-        print("impulse on shooter1")
+        //shootingNode1?.shoot(shootingVector:CGVector(dx: -90, dy: 0))
+        //print("impulse on shooter1")
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,12 +77,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let location = touch.location(in: self)
         let previousLocation = touch.previousLocation(in: self)
         let delta = CGPoint(x: location.x - previousLocation.x, y: location.y - previousLocation.y)
-        cameraNode.position = CGPoint(x: cameraNode.position.x + delta.x, y: cameraNode.position.y + delta.y)
+        shootingVector = calculateShootingVector(currentLocation: location, previousLocation: previousLocation)
+        //shootingNode2?.shoot(shootingVector: calculateShootingVector(currentLocation: location, previousLocation: previousLocation))
+        //cameraNode.position = CGPoint(x: cameraNode.position.x + delta.x, y: cameraNode.position.y + delta.y)
         
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-   
+        //gameState = GameStates.Shooting2
+        shootingNode2?.shoot(shootingVector: shootingVector!)
+        print("impulse applied")
+        
+        switch gameState {
+        case .Shooting1:
+            shootingNode1?.shoot(shootingVector: shootingVector!)
+            print("impulse applied to shooter1")
+            gameState = GameStates.Moving1
+        case .Shooting2:
+            shootingNode2?.shoot(shootingVector: shootingVector!)
+            print("impulse applied to shooter2")
+            gameState = GameStates.Moving2
+        case .Setup1,
+             .Setup2:
+            placeBlock()
+        case .Moving1,
+             .Moving2:
+            //checkIfStopped()
+            print("something is bad m'kay")
+        default:
+            print("something is wrong")
+            
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -84,5 +118,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
+        switch gameState {
+        case .Shooting1:
+            //cameraNode.position = (shootingNode1?.position)!
+            cameraNode.position = CGPoint(x: 2306, y: 724)
+        case .Shooting2:
+            //cameraNode.position = (shootingNode2?.position)!
+            cameraNode.position = CGPoint(x: -350, y: 724)
+        case .Setup1,
+             .Setup2:
+            cameraNode.position = CGPoint(x: 0,y: 0)
+        case .Moving1:
+            cameraNode.position = (shootingNode1?.position)!
+            checkIfStopped(shooter:(shootingNode1)!)
+        case .Moving2:
+            cameraNode.position = (shootingNode2?.position)!
+            checkIfStopped(shooter:(shootingNode2)!)
+        default:
+            cameraNode.position = CGPoint(x: 0,y: 0)
+            
+        }
+        
+    }
+    
+    func calculateShootingVector(currentLocation:CGPoint, previousLocation:CGPoint) -> CGVector {
+        return CGVector(dx: -currentLocation.x + previousLocation.x, dy: currentLocation.y - previousLocation.y)
+    }
+    
+    func placeBlock() {
+        
+    }
+    
+    func checkIfStopped(shooter:ShootingNode) {
+        if shooter.physicsBody!.velocity.dx < CGFloat(0) || shooter.physicsBody!.velocity.dy < CGFloat(0) {
+            print("node has stopped")
+        }
     }
 }

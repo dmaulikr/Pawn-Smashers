@@ -13,6 +13,8 @@ enum GameStates {
     case Setup2
     case Shooting1
     case Shooting2
+    case Moving1
+    case Moving2
     case Menu
     case RoundEnd
     case GameEnd
