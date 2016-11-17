@@ -164,6 +164,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func checkIfStopped(shooter:ShootingNode) {
+        shooter.isMoving()
         if shooter.physicsBody!.velocity.dx == CGFloat(0) && shooter.physicsBody!.velocity.dy == CGFloat(0) {
             print("node has stopped")
             
@@ -176,5 +177,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 print("shiiiiite")
             }
         }
+        print(shooter.physicsBody!.velocity)
     }
 }
