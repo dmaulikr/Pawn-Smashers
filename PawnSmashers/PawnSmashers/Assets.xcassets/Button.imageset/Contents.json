@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Circle_250.png",
+      "filename" : "Box_250.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Circle_500.png",
+      "filename" : "Box_500.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Circle_750.png",
+      "filename" : "Box_750.png",
       "scale" : "3x"
     }
   ],
