@@ -26,11 +26,11 @@ class LevelScene: SKScene{
                 //print("Level 1 pressed")
                 loadScene(level: "1")
             } else if (name == "Level2"){
-                print("Level 2 pressed")
+                loadScene(level: "2")
             } else if (name == "Level3"){
-                print("Level 3 pressed")
+                loadScene(level: "3")
             } else if (name == "Level4"){
-                print("Level 4 pressed")
+                loadScene(level: "4")
             }
         }
     }
@@ -43,8 +43,6 @@ class LevelScene: SKScene{
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first! as UITouch
-        let location = touch.location(in: self)
 
     }
     
@@ -54,10 +52,20 @@ class LevelScene: SKScene{
     
     func loadScene(level: String){
         let fade = SKTransition.fade(withDuration: 2)
-        if let newScene = SKScene(fileNamed: "GameScene"){
+        /*if let newScene = SKScene(fileNamed: "GameScene"){
+            scene?.size = CGSize(width: 1024, height: 768)
             scene?.scaleMode = .aspectFill
-            scene?.view?.presentScene(newScene, transition: fade)
+            scene?.view?.presentScene(newScene, transition: fade)*/
+        if let view = self.view {
+            // Load the SKScene from 'GameScene.sks' - Not currently
+            // Load the SKScene from 'LevelMenu.sks'
+            if let scene = SKScene(fileNamed: "GameScene\(level)") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                    
+                // Present the scene
+                view.presentScene(scene, transition: fade)
+            }
         }
     }
-
 }
