@@ -54,7 +54,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //cameraNode.position = CGPoint(x: 2306, y: 724)
         cameraNode.position = CGPoint(x: -350, y: 724)
         shootingNode1 = childNode(withName: "shooter1") as? ShootingNode
+        shootingNode1?.physicsBody?.isDynamic = true
+        shootingNode1?.physicsBody?.categoryBitMask = PhysicsCategory.Shooter
+        shootingNode1?.physicsBody?.contactTestBitMask = PhysicsCategory.None
+        shootingNode1?.physicsBody?.collisionBitMask = PhysicsCategory.Shooter | PhysicsCategory.ScorePawn
         shootingNode2 = childNode(withName: "shooter2") as? ShootingNode
+        shootingNode2?.physicsBody?.isDynamic = true
+        shootingNode2?.physicsBody?.categoryBitMask = PhysicsCategory.Shooter
+        shootingNode2?.physicsBody?.contactTestBitMask = PhysicsCategory.None
+        shootingNode2?.physicsBody?.collisionBitMask = PhysicsCategory.Shooter | PhysicsCategory.ScorePawn
     }
     
     func reset(){
@@ -167,10 +175,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         node.colorBlendFactor = 0
         node.position = location
         node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
-        node.physicsBody?.isDynamic = false
-        node.physicsBody?.categoryBitMask = PhysicsCategory.Shooter
+        node.physicsBody?.isDynamic = true
+        node.physicsBody?.categoryBitMask = PhysicsCategory.ScorePawn
         node.physicsBody?.contactTestBitMask = PhysicsCategory.None
-        node.physicsBody?.collisionBitMask = PhysicsCategory.Shooter
+        node.physicsBody?.collisionBitMask = PhysicsCategory.Shooter | PhysicsCategory.ScorePawn
         node.zPosition = 10
         addChild(node)
         if( pawnCount > 3) { gameState = GameStates.Shooting2 }

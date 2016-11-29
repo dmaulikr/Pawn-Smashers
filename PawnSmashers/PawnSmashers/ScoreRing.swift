@@ -12,8 +12,11 @@ class ScoreRing : SKSpriteNode {
     
     
     func didMoveToScene() {
-        
-    }
+
+        self.physicsBody?.isDynamic = false
+        self.physicsBody?.categoryBitMask = PhysicsCategory.ScoreZone
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.ScorePawn
+        self.physicsBody?.collisionBitMask = PhysicsCategory.None    }
     
     
     
