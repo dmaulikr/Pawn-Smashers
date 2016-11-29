@@ -87,8 +87,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //shootingNode1?.shoot(shootingVector:CGVector(dx: -90, dy: 0))
-        //print("impulse on shooter1")
+        let touch = touches.first! as UITouch
+        let location = touch.location(in: self)
+        if(gameState == GameStates.Shooting1 || gameState == GameStates.Shooting2) {
+            let node = SKSpriteNode(imageNamed: "white_triangle")
+            node.name = "force_meter"
+            node.colorBlendFactor = 0
+            node.position = location
+            node.zRotation = 90;
+            node.zPosition = 10
+            addChild(node)
+        }
+        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -97,6 +107,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let previousLocation = touch.previousLocation(in: self)
         let delta = CGPoint(x: location.x - previousLocation.x, y: location.y - previousLocation.y)
         shootingVector = calculateShootingVector(currentLocation: location, previousLocation: previousLocation)
+        if(gameState == GameStates.Shooting1 || gameState == GameStates.Shooting2) {
+            let node = childNode(withName: "force_meter")
+            node?.xScale = calculateShootingVector(currentLocation: location, previousLocation: previousLocation).dx
+        }
         //shootingNode2?.shoot(shootingVector: calculateShootingVector(currentLocation: location, previousLocation: previousLocation))
         //cameraNode.position = CGPoint(x: cameraNode.position.x + delta.x, y: cameraNode.position.y + delta.y)
         
@@ -124,6 +138,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .Moving1,
              .Moving2:
             //checkIfStopped()
+            childNode(withName: "force_meter")?.removeFromParent()
             print("something is bad m'kay")
         default:
             print("something is wrong")
